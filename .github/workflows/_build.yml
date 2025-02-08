@@ -10,7 +10,7 @@ on:
       meteor_tag:
         type: string
         description: Version tag to use alongside exact version (e.g. latest, alpha, beta, etc.)
-        required: false
+        default: latest
       docker_registry:
         type: string
         default: ghcr.io
@@ -58,7 +58,7 @@ jobs:
         # language="bashsupport pro shell script"
         run: |
           imageName="$(echo $FULL_IMAGE_NAME | tr '[:upper:]' '[:lower:]')"
-          tags="$imageName:${{ inputs.meteor_version }}"
+          tags="$imageName:${{ inputs.meteor_version }},$imageName:${{ inputs.meteor_tag }}"
           cacheTag="$imageName:buildcache"
           
           echo "cacheTag=${cacheTag}"   >> $GITHUB_OUTPUT
