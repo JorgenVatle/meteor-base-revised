@@ -4,9 +4,6 @@
 # - https://github.com/disney/meteor-base
 FROM ubuntu
 
-# Meteor version to build for; see ../build.sh
-ARG METEOR_VERSION
-
 ENV SCRIPTS_FOLDER=/docker
 ENV APP_SOURCE_FOLDER=/opt/src
 ENV APP_BUNDLE_FOLDER=/opt/bundle
@@ -16,6 +13,9 @@ ENV DEBIAN_FRONTEND=noninteractive
 RUN apt-get update && \
 	apt-get install --assume-yes apt-transport-https ca-certificates && \
 	apt-get install --assume-yes --no-install-recommends build-essential bzip2 curl git libarchive-tools python3
+
+# Meteor version to build for; see ../build.sh
+ARG METEOR_VERSION
 
 # Install Meteor
 RUN curl https://install.meteor.com/?release=$METEOR_VERSION --output /tmp/install-meteor.sh && \
