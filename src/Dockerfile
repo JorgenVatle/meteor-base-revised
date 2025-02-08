@@ -30,7 +30,7 @@ ENV METEOR_ALLOW_SUPERUSER=true
 
 
 # Copy entrypoint and dependencies
-COPY ./docker $SCRIPTS_FOLDER/
+COPY ./scripts $SCRIPTS_FOLDER/
 
 # Install Docker entrypoint dependencies; npm ci was added in npm 5.7.0, and therefore available only to Meteor 1.7+
 RUN cd $SCRIPTS_FOLDER && \
