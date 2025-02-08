@@ -12,56 +12,17 @@ permissions:
   packages: write
 
 jobs:
-  versions:
-    name: 'Query latest Meteor version'
-    runs-on: ubuntu-22.04
-    outputs:
-      latest: ${{ steps.version.outputs.latest }}
-      beta: ${{ steps.version.outputs.beta }}
-      alpha: ${{ steps.version.outputs.alpha }}
-      rc: ${{ steps.version.outputs.rc }}
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-      - name: Setup Node
-        uses: actions/setup-node@v4
-      - name: Get latest Meteor version
-        id: version
-        # language="bashsupport pro shell script"
-        run: |
-          for tag in latest beta alpha rc; do
-            version="$(npm view meteor dist-tags.$tag)"
-            
-            # Determine corresponding Meteor version for npm tag
-            npx meteor@$tag
-            version=$(/home/runner/.meteor/meteor --version)
-            version=${version/Meteor /}
-            rm -rf /home/runner/.meteor
-            
-            echo "meteor@$tag => $version"
-            
-            echo "$tag=$version" >> $GITHUB_OUTPUT
-          done
   build:
     name: Build
-    uses: ./.github/workflows/_build.yml
-    needs: versions
+    uses: ./.github/workflows/_build-tag.yml
     with:
-      meteor_version: ${{ matrix.version }}
-      meteor_tag: ${{ matrix.tag }}
+      tag: ${{ matrix.tag }}
     strategy:
       fail-fast: false
       matrix:
-        include:
-            -
-              tag: latest
-              version: ${{ needs.versions.outputs.latest }}
-            -
-              tag: beta
-              version: ${{ needs.versions.outputs.beta }}
-            -
-              tag: alpha
-              version: ${{ needs.versions.outputs.alpha }}
-            -
-              tag: rc
-              version: ${{ needs.versions.outputs.rc }}
+        tag:
+          - latest
+          - beta
+          - alpha
+          - rc
+
