@@ -9,9 +9,6 @@ on:
         description: Release tag to build and release (e.g. latest, rc, beta, alpha, next, etc)
         required: true
 
-permissions:
-  packages: write
-
 jobs:
   info:
     name: 'Determine meteor version'
