@@ -32,5 +32,5 @@ COPY --from=meteor-base $APP_BUNDLE_FOLDER/bundle $APP_BUNDLE_FOLDER/bundle/
 RUN bash $SCRIPTS_FOLDER/app/npm-install.sh
 
 # Start app
-ENTRYPOINT ["/docker/app/entrypoint.sh"]
+ENTRYPOINT ["${SCRIPTS_FOLDER}/app/entrypoint.sh"]
 CMD ["node", "main.js"]
