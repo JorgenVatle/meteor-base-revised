@@ -39,12 +39,21 @@ jobs:
     name: Build
     uses: ./.github/workflows/_build.yml
     needs: versions
-    strategy:
-      matrix:
-        version:
-          - ${{ needs.versions.outputs.latest }}
-          - ${{ needs.versions.outputs.beta }}
-          - ${{ needs.versions.outputs.alpha }}
-          - ${{ needs.versions.outputs.rc }}
     with:
       meteor_version: ${{ matrix.version }}
+      meteor_tag: ${{ matrix.tag }}
+    strategy:
+      matrix:
+        include:
+            -
+              tag: latest
+              version: ${{ needs.versions.outputs.latest }}
+            -
+              tag: beta
+              version: ${{ needs.versions.outputs.beta }}
+            -
+              tag: alpha
+              version: ${{ needs.versions.outputs.alpha }}
+            -
+              tag: rc
+              version: ${{ needs.versions.outputs.rc }}

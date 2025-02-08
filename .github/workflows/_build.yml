@@ -7,6 +7,10 @@ on:
         required: true
         type: string
         description: Meteor version to build
+      meteor_tag:
+        type: string
+        description: Version tag to use alongside exact version (e.g. latest, alpha, beta, etc.)
+        required: false
       docker_registry:
         type: string
         default: ghcr.io
