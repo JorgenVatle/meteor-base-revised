@@ -34,8 +34,7 @@ jobs:
             
             # Determine corresponding Meteor version for npm tag
             npx meteor@$tag
-            source $HOME/.bashrc
-            version=$(meteor --version)
+            version=$(/home/runner/.meteor/meteor --version)
             
             echo "meteor@$tag => $version"
             
