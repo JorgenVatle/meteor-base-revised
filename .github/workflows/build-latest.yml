@@ -9,11 +9,14 @@ on:
       - master
 
 jobs:
-  info:
+  versions:
     name: 'Query latest Meteor version'
     runs-on: ubuntu-22.04
     outputs:
-      packageInfo: ${{ steps.version.packageInfo }}
+      latest: ${{ steps.version.outputs.latest }}
+      beta: ${{ steps.version.outputs.beta }}
+      alpha: ${{ steps.version.outputs.alpha }}
+      rc: ${{ steps.version.outputs.rc }}
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -23,19 +26,22 @@ jobs:
         id: version
         # language="bashsupport pro shell script"
         run: |
-          {
-            echo 'packageInfo<<EOF'
-            echo [
-            npm view meteor --json
-            echo ]
-            echo EOF
-          } >> "$GITHUB_OUTPUT"
+          for tag in latest beta alpha rc; do
+            version="$(npm view meteor dist-tags.$tag)"
+            echo "meteor@$tag => $version"
+            
+            echo "$tag=$version" >> $GITHUB_OUTPUT
+          done
   build:
     name: Build
     uses: ./.github/workflows/_build.yml
-    needs: info
+    needs: versions
     strategy:
       matrix:
-        include: ${{ fromJSON(needs.info.outputs.packageInfo) }}
+        version:
+          - ${{ needs.versions.outputs.latest }}
+          - ${{ needs.versions.outputs.beta }}
+          - ${{ needs.versions.outputs.alpha }}
+          - ${{ needs.versions.outputs.rc }}
     with:
-      meteor_version: ${{ matrix.dist-tags.latest }}
+      meteor_version: ${{ matrix.version }}
