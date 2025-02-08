@@ -9,6 +9,10 @@
 > - The default `entrypoint.sh` shipped with the final bundle no longer indefinitely polls for a MongoDB valid connection -
 > instead it will exit with an error code. This addresses issues when running images in container orchestration software
 > like Kubernetes where containers can invalidly be reported as healthy when in reality it cannot connect to Mongo.
+> 
+> - Scripts have been refactored to better indicate their expected usage context.
+> - Example usage has been refactored to better take advantage for Docker layer caching - significantly speeding up 
+> repeated builds when Meteor's dependencies haven't changed.
 
 This repo contains a base Docker image for use by [Meteor](https://www.meteor.com/) apps built using a [multistage Dockerfile](https://docs.docker.com/develop/develop-images/multistage-build/). You might want to use this base because:
 
