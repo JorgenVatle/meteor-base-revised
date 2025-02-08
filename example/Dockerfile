@@ -7,11 +7,11 @@ ARG METEOR_VERSION=3.0.4
 FROM jorgenvatle/meteor-base:$METEOR_VERSION AS meteor-base
 
 # Copy app package.json and package-lock.json into container
-COPY ./app/package*.json $APP_SOURCE_FOLDER/
+COPY --link ./app/package*.json $APP_SOURCE_FOLDER/
 RUN bash $SCRIPTS_FOLDER/meteor/npm-install.sh
 
 # Copy app source into container
-COPY ./app $APP_SOURCE_FOLDER/
+COPY --link ./app $APP_SOURCE_FOLDER/
 RUN bash $SCRIPTS_FOLDER/meteor/build.sh
 
 
@@ -25,8 +25,8 @@ RUN apk --no-cache add \
 		ca-certificates
 
 # Copy in entrypoint and app bundle
-COPY --from=meteor-base $SCRIPTS_FOLDER $SCRIPTS_FOLDER/
-COPY --from=meteor-base $APP_BUNDLE_FOLDER/bundle $APP_BUNDLE_FOLDER/bundle/
+COPY --link --from=meteor-base $SCRIPTS_FOLDER $SCRIPTS_FOLDER/
+COPY --link --from=meteor-base $APP_BUNDLE_FOLDER/bundle $APP_BUNDLE_FOLDER/bundle/
 
 # Install dependencies
 RUN bash $SCRIPTS_FOLDER/app/npm-install.sh
