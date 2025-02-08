@@ -10,18 +10,18 @@ on:
         required: true
 
 jobs:
-  info:
+  meteor:
     name: 'Determine meteor version'
     runs-on: ubuntu-22.04
     outputs:
-      version: ${{ steps.version.outputs.version }}
+      version: ${{ steps.meteor.outputs.version }}
     steps:
       - name: Checkout
         uses: actions/checkout@v4
       - name: Setup Node
         uses: actions/setup-node@v4
       - name: Get latest Meteor version
-        id: version
+        id: meteor
         # language="bashsupport pro shell script"
         run: |
           # Determine corresponding Meteor version for npm tag
@@ -33,9 +33,9 @@ jobs:
            
            echo "version=$version" >> $GITHUB_OUTPUT
   build:
-    name: Meteor v${{ needs.info.outputs.version }}
+    name: Build
     uses: ./.github/workflows/_build.yml
-    needs: info
+    needs: meteor
     with:
-      meteor_version: ${{ needs.info.outputs.version }}
+      meteor_version: ${{ needs.meteor.outputs.version }}
       meteor_tag: ${{ inputs.tag }}
