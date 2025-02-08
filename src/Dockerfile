@@ -28,7 +28,6 @@ RUN curl https://install.meteor.com/?release=$METEOR_VERSION --output /tmp/insta
 # Fix permissions warning; https://github.com/meteor/meteor/issues/7959
 ENV METEOR_ALLOW_SUPERUSER=true
 
-
 # Copy entrypoint and dependencies
 COPY ./scripts $SCRIPTS_FOLDER/
 
