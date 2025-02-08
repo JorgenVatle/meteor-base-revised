@@ -1,0 +1,44 @@
+# Build for latest Meteor release
+name: 'Build: ${{ inputs.tag }}'
+run-name: '🐋 Build: meteor@${{ inputs.tag }} | ${{ github.event.head_commit.message || github.event.pull_request.title }}'
+on:
+  workflow_call:
+    inputs:
+      tag:
+        type: string
+        description: Release tag to build and release (e.g. latest, rc, beta, alpha, next, etc)
+        required: true
+
+permissions:
+  packages: write
+
+jobs:
+  info:
+    name: 'Determine meteor version'
+    runs-on: ubuntu-22.04
+    outputs:
+      version: ${{ steps.version.outputs.version }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Setup Node
+        uses: actions/setup-node@v4
+      - name: Get latest Meteor version
+        id: version
+        # language="bashsupport pro shell script"
+        run: |
+          # Determine corresponding Meteor version for npm tag
+           npx meteor@${{ inputs.tag }}
+           version=$(/home/runner/.meteor/meteor --version)
+           version=${version/Meteor /}
+           
+           echo "meteor@$tag => $version"
+           
+           echo "$tag=$version" >> $GITHUB_OUTPUT
+  build:
+    name: Meteor v${{ needs.info.outputs.version }}
+    uses: ./.github/workflows/_build.yml
+    needs: info
+    with:
+      meteor_version: ${{ needs.info.outputs.version }}
+      meteor_tag: ${{ inputs.tag }}
