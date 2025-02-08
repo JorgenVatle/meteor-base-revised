@@ -10,7 +10,7 @@ FROM jorgenvatle/meteor-base:$METEOR_VERSION AS meteor-base
 COPY --link ./app/package*.json $APP_SOURCE_FOLDER/
 RUN bash $SCRIPTS_FOLDER/meteor/npm-install.sh
 
-# Install Meteor's atmosphere dependencies; enables caching for Meteor packages
+# Install Meteor's packages; speeds up the following build step if your Meteor dependencies haven't changed since the last build
 COPY --link ./app/.meteor $APP_SOURCE_FOLDER/.meteor
 RUN bash $SCRIPTS_FOLDER/meteor/atmosphere-install.sh
 
