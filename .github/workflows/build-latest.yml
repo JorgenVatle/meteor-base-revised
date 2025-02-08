@@ -27,7 +27,7 @@ jobs:
           echo "packageInfo=$packageInfo" >> $GITHUB_OUTPUT
   build:
     name: Build
-    uses: /.github/workflows/_build.yml
+    uses: ./.github/workflows/_build.yml
     needs: info
     with:
       meteor_version: ${{ needs.info.outputs.packageInfo.dist-tags.latest }}
