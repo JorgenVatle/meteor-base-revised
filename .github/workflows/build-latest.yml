@@ -35,6 +35,7 @@ jobs:
             # Determine corresponding Meteor version for npm tag
             npx meteor@$tag
             version=$(/home/runner/.meteor/meteor --version)
+            version=${version/Meteor /}
             npx meteor uninstall
             
             echo "meteor@$tag => $version"
