@@ -14,7 +14,7 @@ RUN bash $SCRIPTS_FOLDER/meteor/npm-install.sh
 COPY --link ./app/.meteor $APP_SOURCE_FOLDER/.meteor
 RUN bash $SCRIPTS_FOLDER/meteor/atmosphere-install.sh
 
-# Copy app source into container
+# Bundle app for production
 COPY --link ./app $APP_SOURCE_FOLDER/
 RUN bash $SCRIPTS_FOLDER/meteor/build.sh
 
