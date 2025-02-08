@@ -6,9 +6,13 @@ ARG METEOR_VERSION=3.0.4
 
 FROM jorgenvatle/meteor-base:$METEOR_VERSION AS meteor-base
 
-# Copy app package.json and package-lock.json into container
+# Install npm dependencies
 COPY --link ./app/package*.json $APP_SOURCE_FOLDER/
 RUN bash $SCRIPTS_FOLDER/meteor/npm-install.sh
+
+# Install Meteor's atmosphere dependencies; enables caching for Meteor packages
+COPY --link ./app/.meteor $APP_SOURCE_FOLDER/.meteor
+RUN bash $SCRIPTS_FOLDER/meteor/atmosphere-install.sh
 
 # Copy app source into container
 COPY --link ./app $APP_SOURCE_FOLDER/
