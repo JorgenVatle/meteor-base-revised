@@ -36,7 +36,7 @@ jobs:
             npx meteor@$tag
             version=$(/home/runner/.meteor/meteor --version)
             version=${version/Meteor /}
-            npx meteor uninstall
+            rm -rf /home/runner/.meteor
             
             echo "meteor@$tag => $version"
             
