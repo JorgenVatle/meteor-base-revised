@@ -1,0 +1,32 @@
+# Build for latest Meteor release
+name: Nightly build
+on:
+  schedule:
+    - 0 0 * * *
+  push:
+    branches:
+      - master
+
+jobs:
+  info:
+    name: 'Query latest Meteor version'
+    runs-on: ubuntu-22.04
+    outputs:
+      packageInfo: ${{ fromJSON(steps.version.packageInfo) }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Setup Node
+        uses: actions/setup-node@v4
+      - name: Get latest Meteor version
+        id: version
+        # language="bashsupport pro shell script"
+        run: |
+          packageInfo=$(npm view meteor --json)
+          echo "packageInfo=$packageInfo" >> $GITHUB_OUTPUT
+  build:
+    name: Build
+    uses: /.github/workflows/_build.yml
+    needs: info
+    with:
+      meteor_version: ${{ needs.info.outputs.packageInfo.dist-tags.latest }}
