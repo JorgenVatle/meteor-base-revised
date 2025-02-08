@@ -25,9 +25,6 @@ on:
         required: false
         description: Password to use when authenticating with registry
 
-permissions:
-  packages: write
-
 jobs:
   image:
     name: ${{ inputs.docker_push && 'Push' || 'Image' }}
