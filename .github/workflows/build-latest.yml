@@ -25,12 +25,17 @@ jobs:
         run: |
           {
             echo 'packageInfo<<EOF'
+            echo [
             npm view meteor --json
+            echo ]
             echo EOF
           } >> "$GITHUB_OUTPUT"
   build:
     name: Build
     uses: ./.github/workflows/_build.yml
     needs: info
+    strategy:
+      matrix:
+        include: ${{ fromJSON(needs.info.outputs.packageInfo) }}
     with:
-      meteor_version: ${{ needs.info.outputs.packageInfo.dist-tags.latest }}
+      meteor_version: ${{ matrix.dist-tags.latest }}
