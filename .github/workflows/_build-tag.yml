@@ -1,5 +1,5 @@
 # Build for latest Meteor release
-name: 'Build: ${{ inputs.tag }}'
+name: 'Build: tag'
 run-name: '🐋 Build: meteor@${{ inputs.tag }}'
 on:
   workflow_call:
