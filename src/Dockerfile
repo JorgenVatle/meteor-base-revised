@@ -12,7 +12,7 @@ ENV APP_BUNDLE_FOLDER=/opt/bundle
 ENV DEBIAN_FRONTEND=noninteractive
 RUN apt-get update && \
 	apt-get install --assume-yes apt-transport-https ca-certificates && \
-	apt-get install --assume-yes --no-install-recommends build-essential bzip2 curl git libarchive-tools python3
+	apt-get install --assume-yes --no-install-recommends build-essential bzip2 curl git libarchive-tools python3 node
 
 # Meteor version to build for; see ../build.sh
 ARG METEOR_VERSION
