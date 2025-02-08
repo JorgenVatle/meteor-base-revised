@@ -17,6 +17,9 @@ on:
       docker_push:
         type: boolean
         default: true
+      docker_username:
+        type: string
+        default: ${{ github.actor }}
     secrets:
       docker_password:
         required: false
