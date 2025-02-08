@@ -2,8 +2,13 @@
 
 set -o errexit
 
-printf "\n[-] Installing app NPM dependencies...\n\n"
+printf "\n[-] Installing final application's npm dependencies...\n\n"
 
-cd $APP_SOURCE_FOLDER
+cd $APP_BUNDLE_FOLDER/bundle/programs/server/
+npm install
 
-meteor npm ci || meteor npm install # The latter is for older versions of Meteor that ship with npm < 5.7.0
+if [[ "$1" = '--build-from-source' ]]; then
+	npm rebuild --build-from-source
+	cd $APP_BUNDLE_FOLDER/bundle/programs/server/npm
+	npm rebuild --build-from-source
+fi
