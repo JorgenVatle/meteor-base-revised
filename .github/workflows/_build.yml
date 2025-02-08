@@ -10,10 +10,10 @@ on:
       docker_registry:
         type: string
         default: ghcr.io
-      docker_username:
+      docker_image_name:
         type: string
         description: Docker username - will be used in image tag and for authentication.
-        default: jorgenvatle
+        default: meteor-base
       docker_push:
         type: boolean
         default: true
@@ -26,6 +26,8 @@ jobs:
   image:
     name: ${{ inputs.docker_push && 'Push' || 'Image' }}
     runs-on: ubuntu-22.04
+    env:
+      FULL_IMAGE_NAME: ${{ format('{0}/{1}/{2}', inputs.docker_registry, github.repository_owner, inputs.docker_image_name) }}
     steps:
       -
         name: Checkout
@@ -44,12 +46,24 @@ jobs:
         name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
       -
+        name: Format image
+        id: image
+        # language="bashsupport pro shell script"
+        run: |
+          tags="$FULL_IMAGE_NAME:${{ inputs.meteor_version }}"
+          cacheTag="$FULL_IMAGE_NAME:buildcache"
+          
+          echo "cacheTag='${cacheTag}'"   >> $GITHUB_OUTPUT
+          echo "tags='${tags}'"           >> $GITHUB_OUTPUT
+      -
         name: Build and push
         uses: docker/build-push-action@v6
         with:
           push: ${{ inputs.docker_push }}
-          tags: ${{inputs.docker_registry}}/${{ inputs.docker_username }}/meteor-base:${{ inputs.meteor_version }}
+          tags: ${{ steps.image.outputs.tags }}
           context: ./src
+          cache-from: type=registry,ref=${{ steps.image.outputs.cacheTag }}
+          cache-to: type=registry,ref=${{ steps.image.outputs.cacheTag }},mode=max
           build-args: |
             METEOR_VERSION=${{ inputs.meteor_version }}
 
