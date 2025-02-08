@@ -18,12 +18,7 @@ RUN apt-get update && \
 ARG METEOR_VERSION
 
 # Install Meteor
-RUN curl https://install.meteor.com/?release=$METEOR_VERSION --output /tmp/install-meteor.sh && \
-	# Replace tar with bsdtar in the install script; https://github.com/jshimko/meteor-launchpad/issues/39 and https://github.com/intel/lkp-tests/pull/51
-	sed --in-place "s/tar -xzf.*/bsdtar -xf \"\$TARBALL_FILE\" -C \"\$INSTALL_TMPDIR\"/g" /tmp/install-meteor.sh && \
-	# Install Meteor
-	printf "\n[-] Installing Meteor $METEOR_VERSION...\n\n" && \
-	sh /tmp/install-meteor.sh
+RUN npx "meteor@$METEOR_VERSION"
 
 # Fix permissions warning; https://github.com/meteor/meteor/issues/7959
 ENV METEOR_ALLOW_SUPERUSER=true
