@@ -1,6 +1,6 @@
 # Build for latest Meteor release
 name: 'Build: ${{ inputs.tag }}'
-run-name: '🐋 Build: meteor@${{ inputs.tag }} | ${{ github.event.head_commit.message || github.event.pull_request.title }}'
+run-name: '🐋 Build: meteor@${{ inputs.tag }}'
 on:
   workflow_call:
     inputs:
