@@ -1,5 +1,5 @@
 # The tag here should match the Meteor version of your app, per .meteor/release
-FROM jorgenvatle/meteor-base:3.0.4
+FROM jorgenvatle/meteor-base:3.0.4 AS meteor-base
 
 # Copy app package.json and package-lock.json into container
 COPY ./app/package*.json $APP_SOURCE_FOLDER/
@@ -24,10 +24,10 @@ RUN apk --no-cache add \
 		ca-certificates
 
 # Copy in entrypoint
-COPY --from=0 $SCRIPTS_FOLDER $SCRIPTS_FOLDER/
+COPY --from=meteor-base $SCRIPTS_FOLDER $SCRIPTS_FOLDER/
 
 # Copy in app bundle
-COPY --from=0 $APP_BUNDLE_FOLDER/bundle $APP_BUNDLE_FOLDER/bundle/
+COPY --from=meteor-base $APP_BUNDLE_FOLDER/bundle $APP_BUNDLE_FOLDER/bundle/
 
 RUN bash $SCRIPTS_FOLDER/app/npm-install.sh
 
