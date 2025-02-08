@@ -23,8 +23,11 @@ jobs:
         id: version
         # language="bashsupport pro shell script"
         run: |
-          packageInfo="$(npm view meteor --json)"
-          echo "packageInfo=$packageInfo" >> $GITHUB_OUTPUT
+          {
+            echo 'packageInfo<<EOF'
+            npm view meteor --json
+            echo EOF
+          } >> "$GITHUB_OUTPUT"
   build:
     name: Build
     uses: ./.github/workflows/_build.yml
