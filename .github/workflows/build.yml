@@ -1,5 +1,5 @@
-name: 'Publish'
-run-name: '🐋 Publish | ${{ github.event.head_commit.message || github.event.pull_request.title }}'
+name: 'Build'
+run-name: '🐋 Build | ${{ github.event.head_commit.message || github.event.pull_request.title }}'
 on:
   push:
     branches:
@@ -7,9 +7,11 @@ on:
 
 jobs:
   build:
+    name: Build
     uses: ./.github/workflows/_build.yml
     with:
       meteor_version: ${{ matrix.meteor_version }}
+      docker_push: false
     strategy:
       matrix:
         meteor_version:

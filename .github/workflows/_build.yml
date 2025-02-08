@@ -1,5 +1,4 @@
-name: 'Build'
-run-name: '🐋 Build Meteor v${{ inputs.meteor_version }} | ${{ github.event.head_commit.message || github.event.pull_request.title }}'
+name: 'Build/Push'
 
 on:
   workflow_call:
@@ -25,7 +24,7 @@ on:
 
 jobs:
   build:
-    name: 'Build: Meteor v${{ inputs.meteor_version }}'
+    name: 'Meteor v${{ inputs.meteor_version }}'
     runs-on: ubuntu-22.04
     steps:
       -
