@@ -23,8 +23,8 @@ on:
         description: Password to use when authenticating with registry
 
 jobs:
-  build:
-    name: 'Build'
+  image:
+    name: 'meteor-base:${{ inputs.meteor_version }}'
     runs-on: ubuntu-22.04
     steps:
       -
