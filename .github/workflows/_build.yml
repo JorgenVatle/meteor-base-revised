@@ -53,8 +53,9 @@ jobs:
         id: image
         # language="bashsupport pro shell script"
         run: |
-          tags="$FULL_IMAGE_NAME:${{ inputs.meteor_version }}"
-          cacheTag="$FULL_IMAGE_NAME:buildcache"
+          imageName="$(echo $FULL_IMAGE_NAME | tr '[:upper:]' '[:lower:]')"
+          tags="$imageName:${{ inputs.meteor_version }}"
+          cacheTag="$imageName:buildcache"
           
           echo "cacheTag='${cacheTag}'"   >> $GITHUB_OUTPUT
           echo "tags='${tags}'"           >> $GITHUB_OUTPUT
