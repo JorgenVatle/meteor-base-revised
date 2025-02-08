@@ -24,7 +24,7 @@ on:
 
 jobs:
   image:
-    name: ${{ inputs.docker_push && 'Push' || 'Test' }}
+    name: ${{ inputs.docker_push && 'Push' || 'Image' }}
     runs-on: ubuntu-22.04
     steps:
       -
