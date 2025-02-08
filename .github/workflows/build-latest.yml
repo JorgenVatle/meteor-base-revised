@@ -31,8 +31,11 @@ jobs:
         run: |
           for tag in latest beta alpha rc; do
             version="$(npm view meteor dist-tags.$tag)"
+            
+            # Determine corresponding Meteor version for npm tag
             npx meteor@$tag
             version=$(meteor --version)
+            
             echo "meteor@$tag => $version"
             
             echo "$tag=$version" >> $GITHUB_OUTPUT
