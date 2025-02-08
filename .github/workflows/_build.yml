@@ -24,7 +24,7 @@ on:
 
 jobs:
   image:
-    name: 'meteor-base:${{ inputs.meteor_version }}'
+    name: ${{ inputs.docker_push && 'Push' || 'Test' }}
     runs-on: ubuntu-22.04
     steps:
       -
