@@ -31,7 +31,7 @@ jobs:
            
            echo "meteor@$tag => $version"
            
-           echo "$tag=$version" >> $GITHUB_OUTPUT
+           echo "version=$version" >> $GITHUB_OUTPUT
   build:
     name: Meteor v${{ needs.info.outputs.version }}
     uses: ./.github/workflows/_build.yml
