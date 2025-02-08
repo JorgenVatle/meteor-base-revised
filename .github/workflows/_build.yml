@@ -31,7 +31,7 @@ on:
 
 jobs:
   image:
-    name: ${{ inputs.docker_push && 'Push' || 'Image' }}
+    name: Meteor v${{ inputs.meteor_version }}
     runs-on: ubuntu-22.04
     env:
       FULL_IMAGE_NAME: ${{ format('{0}/{1}/{2}', inputs.docker_registry, github.repository_owner, inputs.docker_image_name) }}
