@@ -57,8 +57,8 @@ jobs:
           tags="$imageName:${{ inputs.meteor_version }}"
           cacheTag="$imageName:buildcache"
           
-          echo "cacheTag='${cacheTag}'"   >> $GITHUB_OUTPUT
-          echo "tags='${tags}'"           >> $GITHUB_OUTPUT
+          echo "cacheTag=${cacheTag}"   >> $GITHUB_OUTPUT
+          echo "tags=${tags}"           >> $GITHUB_OUTPUT
       -
         name: Build and push
         uses: docker/build-push-action@v6
