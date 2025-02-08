@@ -23,7 +23,7 @@ jobs:
         id: version
         # language="bashsupport pro shell script"
         run: |
-          packageInfo=$(npm view meteor --json)
+          packageInfo="$(npm view meteor --json)"
           echo "packageInfo=$packageInfo" >> $GITHUB_OUTPUT
   build:
     name: Build
