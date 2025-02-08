@@ -39,6 +39,7 @@ jobs:
     name: Build
     uses: ./.github/workflows/_build.yml
     needs: versions
+    continue-on-error: ${{ matrix.ignore-error }}
     with:
       meteor_version: ${{ matrix.version }}
       meteor_tag: ${{ matrix.tag }}
@@ -51,9 +52,12 @@ jobs:
             -
               tag: beta
               version: ${{ needs.versions.outputs.beta }}
+              ignore-error: true
             -
               tag: alpha
               version: ${{ needs.versions.outputs.alpha }}
+              ignore-error: true
             -
               tag: rc
               version: ${{ needs.versions.outputs.rc }}
+              ignore-error: true
