@@ -8,6 +8,9 @@ on:
     branches:
       - master
 
+permissions:
+  packages: write
+
 jobs:
   versions:
     name: 'Query latest Meteor version'
