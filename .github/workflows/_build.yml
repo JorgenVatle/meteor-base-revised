@@ -24,7 +24,7 @@ on:
 
 jobs:
   build:
-    name: 'Meteor v${{ inputs.meteor_version }}'
+    name: ''
     runs-on: ubuntu-22.04
     steps:
       -
@@ -46,7 +46,7 @@ jobs:
         with:
           push: ${{ inputs.docker_push }}
           tags: ${{inputs.docker_registry}}/${{ inputs.docker_username }}/meteor-base-revamped:${{ inputs.meteor_version }}
-          context: src
+          context: ./src
           build-args: |
             METEOR_VERSION=${{ inputs.meteor_version }}
 
