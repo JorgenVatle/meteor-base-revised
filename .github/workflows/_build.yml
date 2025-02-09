@@ -23,7 +23,7 @@ on:
         default: true
       docker_username:
         type: string
-        default: ${{ github.actor }}
+        default: jorgenvatle
     secrets:
       docker_password:
         required: false
