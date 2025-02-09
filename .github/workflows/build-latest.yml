@@ -17,6 +17,9 @@ jobs:
     uses: ./.github/workflows/_build-tag.yml
     with:
       tag: ${{ matrix.tag }}
+      docker_registry: 'registry.hub.docker.com'
+    secrets:
+      DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
     strategy:
       fail-fast: false
       matrix:

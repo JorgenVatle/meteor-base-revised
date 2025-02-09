@@ -8,6 +8,13 @@ on:
         type: string
         description: Release tag to build and release (e.g. latest, rc, beta, alpha, next, etc)
         required: true
+      docker_registry:
+        type: string
+        required: false
+    secrets:
+      DOCKER_PASSWORD:
+        required: false
+
 
 jobs:
   meteor:
@@ -39,3 +46,6 @@ jobs:
     with:
       meteor_version: ${{ needs.meteor.outputs.version }}
       meteor_tag: ${{ inputs.tag }}
+      docker_registry: ${{ inputs.docker_registry }}
+    secrets:
+      ${{ secrets.DOCKER_PASSWORD }}
