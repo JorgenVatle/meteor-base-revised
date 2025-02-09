@@ -67,8 +67,8 @@ jobs:
             METEOR_VERSION=${{ inputs.meteor_version }}
           tags: |
             ghcr.io/${{ inputs.docker_image_name }}:${{ inputs.meteor_version }}
-            ghcr.io/${{ inputs.docker_image_name }}:${{ inputs.meteor_tag }}
+            ghcr.io/${{ inputs.docker_image_name }}:${{ inputs.meteor_tag || inputs.meteor_version }}
             ${{ inputs.docker_image_name }}:${{ inputs.meteor_version }}
-            ${{ inputs.docker_image_name }}:${{ inputs.meteor_tag }}
+            ${{ inputs.docker_image_name }}:${{ inputs.meteor_tag || inputs.meteor_version }}
 
 
