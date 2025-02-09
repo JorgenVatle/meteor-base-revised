@@ -47,5 +47,4 @@ jobs:
       meteor_version: ${{ needs.meteor.outputs.version }}
       meteor_tag: ${{ inputs.tag }}
       docker_registry: ${{ inputs.docker_registry }}
-    secrets:
-      ${{ secrets.DOCKER_PASSWORD }}
+    secrets: inherit
