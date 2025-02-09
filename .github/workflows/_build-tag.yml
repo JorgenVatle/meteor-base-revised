@@ -36,6 +36,7 @@ jobs:
     name: Build
     uses: ./.github/workflows/_build.yml
     needs: meteor
+    secrets: inherit
     with:
       meteor_version: ${{ needs.meteor.outputs.version }}
       meteor_tag: ${{ inputs.tag }}
