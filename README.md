@@ -78,25 +78,7 @@ Other projects I looked at generally had one or more of the disadvantages cited 
 
 ### Adding a new Meteor version
 
-Each new Meteor release requires new base images to be built and published. There’s a script in this repo to automate supporting a new Meteor version. For an example Meteor version 7.7.7 that requires Node 8.8.8, run:
+This repository is managed through an action that actively watches Meteor's installer script and creates new images when
+there is a new Meteor version available.
 
-```bash
-# Install Meteor if you haven’t already; see https://www.meteor.com/developers/install
-
-# Install npm-check-updates if you haven’t already
-npm install --global npm-check-updates
-
-./update.sh --meteor-version 7.7.7 --node-version 8.8.8
-```
-
-This will update the various files in this repo that need changing for each new Meteor release. Commit this change on a new branch and open a pull request to this repo to get the new version added. Once the PR is merged, `./build.sh && ./test.sh && ./push.sh` will be run to rebuild, test and publish all images for all versions of Meteor ≥ 1.9. This will also update the version of Ubuntu in the base images to the latest Ubuntu version.
-
-### Test
-
-```bash
-# Build all images
-./build.sh
-
-# Test all images (requires Node, uses Puppeteer which will download headless Chrome)
-./test.sh
-```
+For older versions, see `.github/workflows/build-legacy.yml`.
