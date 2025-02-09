@@ -1,6 +1,6 @@
 # Build for latest Meteor release
 name: 'Build: latest'
-run-name: '🐋 Build: latest | ${{ github.event.head_commit.message || github.event.pull_request.title }}'
+run-name: '🌌 Build: latest | ${{ github.event.head_commit.message || github.event.pull_request.title }}'
 on:
   schedule:
     - cron: 0 0 * * *
