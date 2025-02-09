@@ -33,15 +33,15 @@ Edit the `Dockerfile` you copied into your project, changing the first line so t
 For example, if your project is running under Meteor 3.0.4:
 
 ```Dockerfile
-FROM geoffreybooth/meteor-base:3.0.4
+FROM jorgenvatle/meteor-base:3.0.4
 ```
 
-This version must match an available tag from [geoffreybooth/meteor-base](https://hub.docker.com/r/geoffreybooth/meteor-base/tags).
+This version must match an available tag from [jorgenvatle/meteor-base](https://hub.docker.com/r/jorgenvatle/meteor-base/tags).
 
 If necessary, update version in the `FROM node` line to use the Node version appropriate for your release of Meteor. From your application folder, you can get this version via the following command:
 
 ```bash
-docker run --rm geoffreybooth/meteor-base:$(cat ./.meteor/release | cut -c8-99) meteor node --version | cut -c2-99 | grep -o "[0-9\.]*"
+docker run --rm jorgenvatle/meteor-base:$(cat ./.meteor/release | cut -c8-99) meteor node --version | cut -c2-99 | grep -o "[0-9\.]*"
 ```
 
 ### Step 3: Configure `.dockerignore` to speed up builds
