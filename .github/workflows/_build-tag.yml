@@ -11,6 +11,9 @@ on:
       docker_registry:
         type: string
         required: false
+      docker_username:
+        type: string
+        required: false
     secrets:
       DOCKER_PASSWORD:
         required: false
@@ -47,4 +50,5 @@ jobs:
       meteor_version: ${{ needs.meteor.outputs.version }}
       meteor_tag: ${{ inputs.tag }}
       docker_registry: ${{ inputs.docker_registry }}
+      docker_username: ${{ inputs.docker_username }}
     secrets: inherit
