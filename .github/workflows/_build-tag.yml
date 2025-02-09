@@ -8,6 +8,9 @@ on:
         type: string
         description: Release tag to build and release (e.g. latest, rc, beta, alpha, next, etc)
         required: true
+    secrets:
+      DOCKER_PASSWORD:
+        required: true
 
 jobs:
   meteor:

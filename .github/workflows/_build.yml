@@ -18,6 +18,9 @@ on:
       docker_push:
         type: boolean
         default: true
+    secrets:
+      DOCKER_PASSWORD:
+        required: true
 
 jobs:
   image:
