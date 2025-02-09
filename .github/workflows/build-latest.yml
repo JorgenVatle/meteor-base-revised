@@ -15,7 +15,6 @@ jobs:
   build:
     name: Build
     uses: ./.github/workflows/_build-tag.yml
-    secrets: inherit
     with:
       tag: ${{ matrix.tag }}
     strategy:

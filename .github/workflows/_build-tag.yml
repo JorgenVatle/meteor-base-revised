@@ -39,4 +39,3 @@ jobs:
     with:
       meteor_version: ${{ needs.meteor.outputs.version }}
       meteor_tag: ${{ inputs.tag }}
-    secrets: inherit
