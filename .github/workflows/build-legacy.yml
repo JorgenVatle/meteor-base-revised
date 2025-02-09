@@ -17,6 +17,6 @@ jobs:
     strategy:
       matrix:
         version:
-          - 2.16.0
+          - 2.16
     with:
       meteor_version: ${{ matrix.version }}
