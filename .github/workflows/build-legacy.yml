@@ -1,0 +1,22 @@
+# Build for latest Meteor release
+name: 'Build: legacy'
+run-name: '🐋 Build: legacy versions | ${{ github.event.head_commit.message || github.event.pull_request.title }}'
+on:
+  push:
+    branches:
+      - master
+
+permissions:
+  packages: write
+
+jobs:
+  build:
+    name: Build
+    uses: ./.github/workflows/_build.yml
+    secrets: inherit
+    strategy:
+      matrix:
+        version:
+          - 2.16.0
+    with:
+      meteor_version: ${{ matrix.version }}
