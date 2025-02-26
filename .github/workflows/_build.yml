@@ -71,4 +71,15 @@ jobs:
             ${{ inputs.docker_image_name }}:${{ inputs.meteor_version }}
             ${{ inputs.docker_image_name }}:${{ inputs.meteor_tag || inputs.meteor_version }}
 
+      -
+        name: Update Docker Hub description
+        uses: peter-evans/dockerhub-description@v4
+        if: inputs.docker_push
+        with:
+          username: jorgenvatle
+          password: ${{ secrets.DOCKER_PASSWORD }}
+          repository: jorgenvatle/meteor-base
+          short-description: >-
+            A rewrite of geoffreybooth's meteor-base Docker image. Aimed at simplifying the internal process of
+            building and releasing the base Docker images.
 
