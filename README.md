@@ -1,6 +1,9 @@
 # Base Docker Image for Meteor Apps
 > A rewrite of [geoffreybooth's meteor-base](https://github.com/disney/meteor-base) Docker image.
-> Aimed at simplifying the internal process of building and releasing the base Docker images. 
+> Aimed at simplifying the internal process of building and releasing the base Docker images.
+> 
+> - **Docker Hub**: https://hub.docker.com/r/jorgenvatle/meteor-base
+> - **GitHub**: https://github.com/JorgenVatle/meteor-base-revised
 > 
 > ## Notable changes
 > - Image builds are automated to address frustrations when new Meteor releases are
