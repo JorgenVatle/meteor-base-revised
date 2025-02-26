@@ -79,6 +79,5 @@ jobs:
           username: jorgenvatle
           password: ${{ secrets.DOCKER_PASSWORD }}
           repository: jorgenvatle/meteor-base
-          short-description: >-
-            A rewrite of geoffreybooth's meteor-base Docker image to better take advantage of layer caching.
+          short-description: A rewrite of geoffreybooth's meteor-base Docker image to better take advantage of layer caching.
 
