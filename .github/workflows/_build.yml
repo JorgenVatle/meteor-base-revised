@@ -80,6 +80,5 @@ jobs:
           password: ${{ secrets.DOCKER_PASSWORD }}
           repository: jorgenvatle/meteor-base
           short-description: >-
-            A rewrite of geoffreybooth's meteor-base Docker image. Aimed at simplifying the internal process of
-            building and releasing the base Docker images.
+            A rewrite of geoffreybooth's meteor-base Docker image to better take advantage of layer caching.
 
