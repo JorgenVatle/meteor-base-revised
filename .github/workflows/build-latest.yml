@@ -4,7 +4,7 @@ run-name: >-
   🌌 Build: latest | ${{ github.event.head_commit.message || github.event.pull_request.title || 'Nightly update' }}
 on:
   schedule:
-    - cron: 0 0 * * *
+    - cron: 0 12 * * *
   push:
     branches:
       - master
