@@ -2,7 +2,7 @@
 
 set -o errexit
 
-cd $SCRIPTS_FOLDER
+cd "$SCRIPTS_FOLDER"
 
 # Source an init script that a child image may have added
 if [ -x ./startup.sh ]; then
@@ -10,6 +10,6 @@ if [ -x ./startup.sh ]; then
 fi
 
 echo 'Starting app...'
-cd $APP_BUNDLE_FOLDER/bundle
+cd "$APP_BUNDLE_FOLDER/bundle"
 
 exec "$@"

@@ -8,8 +8,8 @@ printf "\n    If it aborts with an out-of-memory (OOM) or ‘non-zero exit code 
 printf "\n    please increase the container’s available memory.\n"
 printf "\n    See https://github.com/meteor/meteor/issues/9568 for details.\n\n"
 
-mkdir --parents $APP_BUNDLE_FOLDER
+mkdir --parents "$APP_BUNDLE_FOLDER"
 
-cd $APP_SOURCE_FOLDER
+cd "$APP_SOURCE_FOLDER"
 
-meteor build --directory $APP_BUNDLE_FOLDER --server-only
+meteor build --directory "$APP_BUNDLE_FOLDER" --server-only

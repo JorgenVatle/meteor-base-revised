@@ -4,7 +4,7 @@ set -o errexit
 
 printf "\n[-] Installing Meteor packages...\n\n"
 
-cd $APP_SOURCE_FOLDER
+cd "$APP_SOURCE_FOLDER"
 
 # Remove package.json files to prevent Meteor from trying to access mainModule files that might not exist yet.
 rm package*.json || exit 0
