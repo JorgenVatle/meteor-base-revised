@@ -4,18 +4,23 @@ ARG NODE_VERSION=22.18
 # The tag here should match the Meteor version of your app, per .meteor/release
 ARG METEOR_VERSION=3.3
 
+# Path to the root directory of the Meteor app to build.
+# Can be left empty unless your app is nested under some other directory
+ARG METEOR_APP_ROOT
+
 FROM jorgenvatle/meteor-base:$METEOR_VERSION AS meteor-base
+ARG METEOR_APP_ROOT
 
 # Install npm dependencies
-COPY --link ./app/package*.json $APP_SOURCE_FOLDER/
+COPY --link $METEOR_APP_ROOT/package*.json $APP_SOURCE_FOLDER/
 RUN bash $SCRIPTS_FOLDER/meteor/npm-install.sh
 
 # Install Meteor's packages; speeds up the following build step if your Meteor dependencies haven't changed since the last build
-COPY --link ./app/.meteor $APP_SOURCE_FOLDER/.meteor
+COPY --link $METEOR_APP_ROOT/.meteor $APP_SOURCE_FOLDER/.meteor
 RUN bash $SCRIPTS_FOLDER/meteor/atmosphere-install.sh
 
 # Bundle app for production
-COPY --link ./app $APP_SOURCE_FOLDER/
+COPY --link $METEOR_APP_ROOT $APP_SOURCE_FOLDER/
 RUN bash $SCRIPTS_FOLDER/meteor/build.sh
 
 
