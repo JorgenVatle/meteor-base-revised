@@ -4,6 +4,6 @@ set -o errexit
 
 printf "\n[-] Installing Meteor's NPM dependencies...\n\n"
 
-cd $APP_SOURCE_FOLDER
+cd "$APP_SOURCE_FOLDER"
 
 meteor npm ci || meteor npm install # The latter is for older versions of Meteor that ship with npm < 5.7.0
