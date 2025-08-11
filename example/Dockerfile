@@ -36,5 +36,5 @@ COPY --link --from=production-bundle $APP_BUNDLE_FOLDER/bundle $APP_BUNDLE_FOLDE
 RUN bash $SCRIPTS_FOLDER/app/npm-install.sh
 
 # Start app
-ENTRYPOINT ["${SCRIPTS_FOLDER}/app/entrypoint.sh"]
+ENTRYPOINT ["sh", "-c", "$SCRIPTS_FOLDER/app/entrypoint.sh"]
 CMD ["node", "main.js"]
