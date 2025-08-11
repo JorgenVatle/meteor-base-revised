@@ -28,7 +28,7 @@ This repo contains a base Docker image for use by [Meteor](https://www.meteor.co
 
 ### Step 1: Bootstrap `Dockerfile` from template
 
-Copy `example/default.dockerfile` (or `example/app-with-native-dependencies.dockerfile` if your app has native dependencies that require compilation such as `bcrypt`, or if your app is using a version of Meteor older than 1.8.1) into the root of your project and rename it `Dockerfile`. This file assumes that your Meteor app is one level down from the root in a folder named `app`; either move your app there, or edit `Dockerfile` to point to your desired path (or the root of your project). Leave `Dockerfile` at the root.
+Copy [`example/Dockerfile`](/example/Dockerfile) into the root of your project. 
 
 ### Step 2: Set the correct Meteor version in the `Dockerfile`
 
