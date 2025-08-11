@@ -8,7 +8,7 @@ ARG METEOR_VERSION=3.3
 # Can be left empty unless your app is nested under some other directory
 ARG METEOR_APP_ROOT
 
-FROM jorgenvatle/meteor-base:$METEOR_VERSION AS meteor-base
+FROM jorgenvatle/meteor-base:$METEOR_VERSION AS production-bundle
 ARG METEOR_APP_ROOT
 
 # Install npm dependencies
@@ -34,8 +34,8 @@ RUN apk --no-cache add \
 		ca-certificates
 
 # Copy in entrypoint and app bundle
-COPY --link --from=meteor-base $SCRIPTS_FOLDER $SCRIPTS_FOLDER/
-COPY --link --from=meteor-base $APP_BUNDLE_FOLDER/bundle $APP_BUNDLE_FOLDER/bundle/
+COPY --link --from=production-bundle $SCRIPTS_FOLDER $SCRIPTS_FOLDER/
+COPY --link --from=production-bundle $APP_BUNDLE_FOLDER/bundle $APP_BUNDLE_FOLDER/bundle/
 
 # Install dependencies
 RUN bash $SCRIPTS_FOLDER/app/npm-install.sh
