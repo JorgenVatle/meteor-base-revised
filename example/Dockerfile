@@ -1,5 +1,5 @@
 # Use the specific version of Node expected by your Meteor release, per https://docs.meteor.com/changelog.html; this is expected for Meteor 3.0.4
-ARG NODE_VERSION=22.18.0
+ARG NODE_VERSION=22.18
 
 # The tag here should match the Meteor version of your app, per .meteor/release
 ARG METEOR_VERSION=3.3
